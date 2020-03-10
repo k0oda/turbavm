@@ -7,13 +7,13 @@ class Machine:
         self.ram = [None for i in range(0, ram_size)]
         self.disk = [None for i in range(0, disk_size)]
         self.__commands = {
-            '001': self.__store,
-            '010': self.__add,
-            '011': self.__sub,
-            '100': self.__mult,
-            '101': self.__div,
-            '110': self.__output,
-            '111': self.__wait,
+            '0001': self.__store,
+            '0010': self.__add,
+            '0011': self.__sub,
+            '0100': self.__mult,
+            '0101': self.__div,
+            '0110': self.__output,
+            '0111': self.__wait,
         }
     
     def run(self,):
@@ -26,7 +26,7 @@ class Machine:
     
     def send_command(self, code, *args):
         if self.__runned:
-            command = self.__commands.get(code, self.__commands['111'])
+            command = self.__commands.get(code, self.__commands['0111'])
             command(*args)
     
     def __wait(self,):
