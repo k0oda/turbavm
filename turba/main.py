@@ -7,14 +7,11 @@ def main():
     machine.run()
 
     base = os.path.dirname(os.path.abspath(__file__))
-    code_file = open(os.path.join(base, 'code.txt'), 'r')
-    lines = code_file.readlines()
-    for line in lines:
-        line = line.strip()
-        parts = line.split(' ')
-        command = parts[0]
-        parts = parts[1:]
-        machine.send_command(command, *parts)
+    executable = open(os.path.join(base, 'code.run'), 'r')
+    commands = executable.readline().split('/')[:-1]
+    for command in commands:
+        parts = command.split('-')
+        machine.send_command(*parts)
     machine.stop()
 
 if __name__ == "__main__":
