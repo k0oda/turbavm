@@ -34,39 +34,45 @@ class Machine:
     
     def __store(self, into, data,):
         into = int(into)
+        if data[0] == '&':
+            data = int(self.ram[int(data[1:])])
         self.ram[into] = data
     
     def __add(self, first, second,):
         first = int(first)
-        if second[0] == '/':
-            second_operand = int(self.ram[second[1:]])
+        if second[0] == '&':
+            second_operand = int(self.ram[int(second[1:])])
         else:
             second_operand = int(second)
         self.ram[first] = int(self.ram[first]) + second_operand
 
     def __sub(self, first, second,):
         first = int(first)
-        if second[0] == '/':
-            second_operand = int(self.ram[second[1:]])
+        if second[0] == '&':
+            second_operand = int(self.ram[int(second[1:])])
         else:
             second_operand = int(second)
         self.ram[first] = int(self.ram[first]) - second_operand
 
     def __mult(self, first, second,):
         first = int(first)
-        if second[0] == '/':
-            second_operand = int(self.ram[second[1:]])
+        if second[0] == '&':
+            second_operand = int(self.ram[int(second[1:])])
         else:
             second_operand = int(second)
         self.ram[first] = int(self.ram[first]) * second_operand
 
     def __div(self, first, second,):
         first = int(first)
-        if second[0] == '/':
-            second_operand = int(self.ram[second[1:]])
+        if second[0] == '&':
+            second_operand = int(self.ram[int(second[1:])])
         else:
             second_operand = int(second)
         self.ram[first] = int(self.ram[first]) / second_operand
     
-    def __output(self, address):
-        print(self.ram[int(address)])
+    def __output(self, argument):
+        if argument[0] == '&':
+            data = self.ram[int(argument[1:])]
+        else:
+            data = argument
+        print(data)
